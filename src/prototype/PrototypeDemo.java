@@ -3,17 +3,17 @@ package prototype;
 public class PrototypeDemo {
 
     public static void main(String[] args) {
-        Telefon vzor = new Telefon("Samsung", "Galaxy A55", 128, "černá");
-        vzor.nainstalujAplikaci("WhatsApp");
-        vzor.nainstalujAplikaci("Chrome");
+        Phone original = new Phone("Samsung", "Galaxy A55", 128, "black");
+        original.installApp("WhatsApp");
+        original.installApp("Chrome");
 
-        Telefon klon = vzor.klonuj();
-        klon.setBarva("modrá");
-        klon.setPametGb(256);
-        klon.nainstalujAplikaci("Spotify");
+        Phone copy = original.copy();
+        copy.setColor("blue");
+        copy.setStorageGb(256);
+        copy.installApp("Spotify");
 
-        System.out.println("Vzor: " + vzor);
-        System.out.println("Klon: " + klon);
-        System.out.println("Různé instance: " + (vzor != klon));
+        System.out.println("Original: " + original);
+        System.out.println("Copy: " + copy);
+        System.out.println("Different instances: " + (original != copy));
     }
 }

@@ -3,23 +3,23 @@ package builder;
 public class BuilderDemo {
 
     public static void main(String[] args) {
-        Telefon samsung = Telefon.builder("Samsung", "Galaxy A15").build();
-        Telefon iphone = Telefon.builder("Apple", "iPhone 16 Pro")
-                .pamet(256)
+        Phone samsung = Phone.builder("Samsung", "Galaxy A15").build();
+        Phone iphone = Phone.builder("Apple", "iPhone 16 Pro")
+                .storage(256)
                 .ram(8)
-                .uhlopricka(6.3)
-                .barva("titanová")
+                .screenSize(6.3)
+                .color("titanium")
                 .nfc(true)
-                .podpora5g(true)
+                .support5g(true)
                 .build();
 
         System.out.println(samsung);
         System.out.println(iphone);
 
         try {
-            Telefon.builder("Xiaomi", "Redmi 13").pamet(8).ram(16).build();
+            Phone.builder("Xiaomi", "Redmi 13").storage(8).ram(16).build();
         } catch (IllegalStateException e) {
-            System.out.println("Neplatný telefon: " + e.getMessage());
+            System.out.println("Invalid phone: " + e.getMessage());
         }
     }
 }

@@ -1,40 +1,40 @@
 package singleton;
 
-import builder.Telefon;
+import builder.Phone;
 
 public class SingletonDemo {
 
     public static void main(String[] args) {
-        Telefon iphone = Telefon.builder("Apple", "iPhone 16 Pro").pamet(256).ram(8).build();
-        Telefon samsung = Telefon.builder("Samsung", "Galaxy A15").build();
+        Phone iphone = Phone.builder("Apple", "iPhone 16 Pro").storage(256).ram(8).build();
+        Phone samsung = Phone.builder("Samsung", "Galaxy A15").build();
 
-        prijemZbozi(iphone, 5);
-        prijemZbozi(samsung, 10);
+        receiveGoods(iphone, 5);
+        receiveGoods(samsung, 10);
 
-        prodej("E-shop", "iPhone 16 Pro", 2);
-        prodej("Pobočka", "iPhone 16 Pro", 4);
-        prodej("Pobočka", "Galaxy A15", 3);
+        sell("E-shop", "iPhone 16 Pro", 2);
+        sell("Branch", "iPhone 16 Pro", 4);
+        sell("Branch", "Galaxy A15", 3);
 
         System.out.println();
-        SkladTelefonu.getInstance().vypisSklad();
+        PhoneWarehouse.getInstance().printStock();
 
-        SkladTelefonu sklad1 = SkladTelefonu.getInstance();
-        SkladTelefonu sklad2 = SkladTelefonu.getInstance();
-        System.out.println("\nStejná instance: " + (sklad1 == sklad2));
+        PhoneWarehouse warehouse1 = PhoneWarehouse.getInstance();
+        PhoneWarehouse warehouse2 = PhoneWarehouse.getInstance();
+        System.out.println("\nSame instance: " + (warehouse1 == warehouse2));
     }
 
-    private static void prijemZbozi(Telefon telefon, int pocet) {
-        SkladTelefonu.getInstance().naskladni(telefon, pocet);
-        System.out.println("Naskladněno: " + telefon.getModel() + " (" + pocet + " ks)");
+    private static void receiveGoods(Phone phone, int quantity) {
+        PhoneWarehouse.getInstance().addStock(phone, quantity);
+        System.out.println("Received: " + phone.getModel() + " (" + quantity + " pcs)");
     }
 
-    private static void prodej(String kde, String model, int pocet) {
-        SkladTelefonu sklad = SkladTelefonu.getInstance();
-        if (sklad.vydej(model, pocet)) {
-            System.out.println(kde + ": prodáno " + pocet + " ks " + model);
+    private static void sell(String store, String model, int quantity) {
+        PhoneWarehouse warehouse = PhoneWarehouse.getInstance();
+        if (warehouse.removeStock(model, quantity)) {
+            System.out.println(store + ": sold " + quantity + " pcs of " + model);
         } else {
-            System.out.println(kde + ": nelze prodat " + pocet + " ks " + model
-                    + ", skladem je jen " + sklad.pocetKusu(model));
+            System.out.println(store + ": cannot sell " + quantity + " pcs of " + model
+                    + ", only " + warehouse.getQuantity(model) + " in stock");
         }
     }
 }
