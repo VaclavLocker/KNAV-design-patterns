@@ -1,5 +1,7 @@
+import bridge.BridgeDemo;
 import builder.BuilderDemo;
 import composite.CompositeDemo;
+import facade.FacadeDemo;
 import prototype.PrototypeDemo;
 import singleton.SingletonDemo;
 
@@ -13,6 +15,9 @@ public class Main {
 
         System.out.println("\n=== Prototype ===");
         PrototypeDemo.main(args);
+
+        System.out.println("\n=== Bridge ===");
+        BridgeDemo.main(args);
 
         System.out.println("\n=== Composite ===");
         CompositeDemo.main(args);
